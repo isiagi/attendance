@@ -47,7 +47,7 @@ export function HomeStats({ totalLearners, presentToday, absentToday, averageAtt
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Today's Attendance</CardTitle>
+            <CardTitle>Today&apos;s Attendance</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={200}>

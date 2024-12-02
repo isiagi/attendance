@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label"
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
+  // PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
