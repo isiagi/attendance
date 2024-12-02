@@ -59,6 +59,7 @@ const PaginationLink = ({
 )
 PaginationLink.displayName = "PaginationLink"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PaginationPrevious = ({
   className,
   ...props
@@ -75,6 +76,7 @@ const PaginationPrevious = ({
 )
 PaginationPrevious.displayName = "PaginationPrevious"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PaginationNext = ({
   className,
   ...props
