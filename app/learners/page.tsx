@@ -1,5 +1,8 @@
 "use client"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useState } from "react"
 import { LearnersTable } from "@/components/learners-table"
 import {
@@ -11,7 +14,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 
-const dummyLearners = [
+const dummyLearners: any = [
   {
     id: "1",
     name: "Alice Johnson",
