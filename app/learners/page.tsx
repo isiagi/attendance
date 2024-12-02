@@ -5,7 +5,6 @@ import { LearnersTable } from "@/components/learners-table"
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
