@@ -3,7 +3,13 @@
 import { useState } from "react"
 import { AttendanceTable } from "@/components/attendance-table"
 
-const initialLearners = [
+type Learner = {
+  id: string
+  name: string
+  status: "present" | "absent" | "not marked"
+}
+
+const initialLearners: Learner[] = [
   {
     id: "1",
     name: "Alice Johnson",
