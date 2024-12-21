@@ -1,7 +1,7 @@
 // contexts/AuthContext.tsx
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 type AuthContextType = {
   isLoggedIn: boolean;
@@ -14,9 +14,18 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // Load auth state on initial mount
+  useEffect(() => {
+    const storedAuthState = localStorage.getItem("isLoggedIn");
+    if (storedAuthState === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   const handleLogin = (username: string, password: string) => {
     if (username === "admin" && password === "password") {
       setIsLoggedIn(true);
+      localStorage.setItem("isLoggedIn", "true");
     } else {
       alert("Invalid credentials");
     }
@@ -24,6 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    localStorage.removeItem("isLoggedIn");
   };
 
   return (

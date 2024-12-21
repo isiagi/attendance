@@ -1,7 +1,7 @@
 // app/layout.tsx
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/sidebar";
@@ -11,6 +11,16 @@ const inter = Inter({ subsets: ["latin"] });
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const { isLoggedIn } = useAuth();
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Don't render anything until hydration is complete
+  if (!isHydrated) {
+    return null;
+  }
 
   return (
     <div className="flex h-screen">
