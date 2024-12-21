@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { use } from "react" // Import the `use` hook
 import { Button } from "@/components/ui/button"
 import {
   Table,
@@ -16,7 +15,7 @@ import { Label } from "@/components/ui/label"
 import {
   Pagination,
   PaginationContent,
-  // PaginationEllipsis,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -30,7 +29,7 @@ type AttendanceRecord = {
   status: "present" | "absent"
 }
 
-// Dummy data for demonstration
+// This is dummy data. In a real application, you would fetch this data based on the learner's ID.
 const initialAttendanceRecords: AttendanceRecord[] = [
   { date: "2023-06-01", status: "present" },
   { date: "2023-06-02", status: "present" },
@@ -44,9 +43,7 @@ const initialAttendanceRecords: AttendanceRecord[] = [
   { date: "2023-06-10", status: "present" },
 ]
 
-export default function LearnerAttendancePage({ params: paramsPromise }: { params: Promise<{ id: string }> }) {
-  const params = use(paramsPromise) // Unwrap the params Promise
-
+export default function LearnerAttendancePage({ params }: { params: { id: string } }) {
   const [attendanceRecords, setAttendanceRecords] = useState(initialAttendanceRecords)
   const [currentPage, setCurrentPage] = useState(1)
   const [searchDate, setSearchDate] = useState("")
@@ -165,3 +162,4 @@ export default function LearnerAttendancePage({ params: paramsPromise }: { param
     </div>
   )
 }
+
