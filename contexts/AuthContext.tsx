@@ -1,6 +1,6 @@
-// contexts/AuthContext.tsx
 "use client";
 
+import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 type AuthContextType = {
@@ -13,8 +13,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
-  // Load auth state on initial mount
   useEffect(() => {
     const storedAuthState = localStorage.getItem("isLoggedIn");
     if (storedAuthState === "true") {
@@ -22,18 +22,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const handleLogin = (username: string, password: string) => {
-    if (username === "admin" && password === "password") {
-      setIsLoggedIn(true);
-      localStorage.setItem("isLoggedIn", "true");
-    } else {
-      alert("Invalid credentials");
+  const handleLogin = async (username: string, password: string) => {
+    try {
+      // In real app, replace with actual API call
+      if (username === "admin" && password === "password") {
+        router.push("/");
+        setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", "true");
+      } else {
+        throw new Error("Invalid credentials");
+      }
+    } catch (error) {
+      // Better error handling
+      console.error(error);
+      alert(error instanceof Error ? error.message : "Login failed");
     }
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
+    // router.push("/login");
   };
 
   return (
