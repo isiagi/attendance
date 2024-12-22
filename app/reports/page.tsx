@@ -1,36 +1,58 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Download, FileSpreadsheet, FileIcon as FilePdf, Mail } from 'lucide-react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { FileSpreadsheet, FileIcon as FilePdf, Mail } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 export default function ReportsPage() {
-  const [reportType, setReportType] = useState("daily")
-  const [startDate, setStartDate] = useState("")
-  const [endDate, setEndDate] = useState("")
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false)
-  const [email, setEmail] = useState("")
+  const [reportType, setReportType] = useState("daily");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
 
   const handleDownload = (format: "excel" | "pdf") => {
     // In a real application, this would trigger the download
-    console.log(`Downloading ${reportType} report from ${startDate} to ${endDate} in ${format} format`)
-  }
+    console.log(
+      `Downloading ${reportType} report from ${startDate} to ${endDate} in ${format} format`
+    );
+  };
 
   const handleEmailReport = () => {
-    setIsEmailModalOpen(true)
-  }
+    setIsEmailModalOpen(true);
+  };
 
   const sendEmailReport = () => {
     // In a real application, this would send an email with the report
-    console.log(`Emailing ${reportType} report from ${startDate} to ${endDate} to ${email}`)
-    setIsEmailModalOpen(false)
-    setEmail("")
-  }
+    console.log(
+      `Emailing ${reportType} report from ${startDate} to ${endDate} to ${email}`
+    );
+    setIsEmailModalOpen(false);
+    setEmail("");
+  };
 
   return (
     <div className="space-y-6">
@@ -38,7 +60,9 @@ export default function ReportsPage() {
       <Card>
         <CardHeader>
           <CardTitle>Generate Report</CardTitle>
-          <CardDescription>Select the type of report and date range</CardDescription>
+          <CardDescription>
+            Select the type of report and date range
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -112,11 +136,12 @@ export default function ReportsPage() {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" onClick={sendEmailReport}>Send Report</Button>
+            <Button type="submit" onClick={sendEmailReport}>
+              Send Report
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
-

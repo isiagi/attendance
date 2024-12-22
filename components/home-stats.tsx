@@ -1,12 +1,22 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
 
 type StatCardProps = {
-  title: string
-  value: string | number
-}
+  title: string;
+  value: string | number;
+};
 
 function StatCard({ title, value }: StatCardProps) {
   return (
@@ -18,23 +28,29 @@ function StatCard({ title, value }: StatCardProps) {
         <div className="text-2xl font-bold">{value}</div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 type HomeStatsProps = {
-  totalLearners: number
-  presentToday: number
-  absentToday: number
-  averageAttendance: number
-  attendanceByDay: { day: string; present: number; absent: number }[]
-}
+  totalLearners: number;
+  presentToday: number;
+  absentToday: number;
+  averageAttendance: number;
+  attendanceByDay: { day: string; present: number; absent: number }[];
+};
 
-export function HomeStats({ totalLearners, presentToday, absentToday, averageAttendance, attendanceByDay }: HomeStatsProps) {
+export function HomeStats({
+  totalLearners,
+  presentToday,
+  absentToday,
+  averageAttendance,
+  attendanceByDay,
+}: HomeStatsProps) {
   const pieChartData = [
-    { name: 'Present', value: presentToday },
-    { name: 'Absent', value: absentToday },
-  ]
-  const COLORS = ['#4ade80', '#f87171']
+    { name: "Present", value: presentToday },
+    { name: "Absent", value: absentToday },
+  ];
+  const COLORS = ["#4ade80", "#f87171"];
 
   return (
     <div className="space-y-4">
@@ -47,7 +63,7 @@ export function HomeStats({ totalLearners, presentToday, absentToday, averageAtt
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Today's Attendance</CardTitle>
+            <CardTitle>Today&apos;s Attendance</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={200}>
@@ -62,7 +78,10 @@ export function HomeStats({ totalLearners, presentToday, absentToday, averageAtt
                   dataKey="value"
                 >
                   {pieChartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
                 <Tooltip />
@@ -88,6 +107,5 @@ export function HomeStats({ totalLearners, presentToday, absentToday, averageAtt
         </Card>
       </div>
     </div>
-  )
+  );
 }
-
