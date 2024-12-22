@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { LearnersTable } from "@/components/learners-table"
+import { useState } from "react";
+import { LearnersTable } from "@/components/learners-table";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
+  // PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 
 const dummyLearners = [
   {
@@ -24,7 +24,7 @@ const dummyLearners = [
     id: "2",
     name: "Bob Smith",
     email: "bob@example.com",
-    phone:"555-123-4567",
+    phone: "555-123-4567",
     address: "456 Elm St, Town, Country",
   },
   {
@@ -55,16 +55,19 @@ const dummyLearners = [
     phone: "012-345-6789",
     address: "987 Cedar St, Village, Country",
   },
-]
+];
 
 export default function LearnersPage() {
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 3
-  const totalPages = Math.ceil(dummyLearners.length / itemsPerPage)
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(dummyLearners.length / itemsPerPage);
 
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentLearners = dummyLearners.slice(indexOfFirstItem, indexOfLastItem)
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentLearners = dummyLearners.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   return (
     <div>
@@ -73,14 +76,14 @@ export default function LearnersPage() {
       <Pagination className="mt-4">
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious 
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            <PaginationPrevious
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
             />
           </PaginationItem>
           {[...Array(totalPages)].map((_, i) => (
             <PaginationItem key={i}>
-              <PaginationLink 
+              <PaginationLink
                 onClick={() => setCurrentPage(i + 1)}
                 isActive={currentPage === i + 1}
               >
@@ -89,14 +92,15 @@ export default function LearnersPage() {
             </PaginationItem>
           ))}
           <PaginationItem>
-            <PaginationNext 
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            <PaginationNext
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
               disabled={currentPage === totalPages}
             />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
     </div>
-  )
+  );
 }
-
