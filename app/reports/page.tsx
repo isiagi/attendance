@@ -7,11 +7,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Download, FileSpreadsheet, FileIcon as FilePdf, Mail } from 'lucide-react'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 
 export default function ReportsPage() {
   const [reportType, setReportType] = useState("daily")
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false)
+  const [email, setEmail] = useState("")
 
   const handleDownload = (format: "excel" | "pdf") => {
     // In a real application, this would trigger the download
@@ -19,8 +22,14 @@ export default function ReportsPage() {
   }
 
   const handleEmailReport = () => {
+    setIsEmailModalOpen(true)
+  }
+
+  const sendEmailReport = () => {
     // In a real application, this would send an email with the report
-    console.log(`Emailing ${reportType} report from ${startDate} to ${endDate}`)
+    console.log(`Emailing ${reportType} report from ${startDate} to ${endDate} to ${email}`)
+    setIsEmailModalOpen(false)
+    setEmail("")
   }
 
   return (
@@ -81,6 +90,32 @@ export default function ReportsPage() {
           </div>
         </CardContent>
       </Card>
+
+      <Dialog open={isEmailModalOpen} onOpenChange={setIsEmailModalOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Email Report</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="email" className="text-right">
+                Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="col-span-3"
+                placeholder="Enter email address"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button type="submit" onClick={sendEmailReport}>Send Report</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
