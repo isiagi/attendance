@@ -30,7 +30,8 @@ export function LoginForm() {
       <CardHeader>
         <CardTitle>Login</CardTitle>
         <CardDescription>
-          Enter your credentials to access the system
+          Enter your credentials to access the
+          system,***username:admin,password:password***
         </CardDescription>
       </CardHeader>
       <CardContent>

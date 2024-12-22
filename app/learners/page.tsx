@@ -78,7 +78,10 @@ export default function LearnersPage() {
           <PaginationItem>
             <PaginationPrevious
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
+              className={
+                currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+              }
+              aria-disabled={currentPage === 1}
             />
           </PaginationItem>
           {[...Array(totalPages)].map((_, i) => (
@@ -96,7 +99,12 @@ export default function LearnersPage() {
               onClick={() =>
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }
-              disabled={currentPage === totalPages}
+              className={
+                currentPage === totalPages
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              }
+              aria-disabled={currentPage === totalPages}
             />
           </PaginationItem>
         </PaginationContent>
